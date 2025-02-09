@@ -1,24 +1,34 @@
 #!/usr/bin/env python
 import sys
 import warnings
+import json
 
 from halal_scanner.crew import HalalScanner
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
-# This main file is intended to be a way for you to run your
-# crew locally, so refrain from adding unnecessary logic into this file.
-# Replace with inputs you want to test with, it will automatically
-# interpolate any tasks and agents information
-
 def run():
     """
-    Run the crew.
+    Run the crew and return structured JSON output.
     """
     inputs = {
-        'topic': 'AI LLMs'
+        'token_name': 'Bitcoin'  # Example token name, replace dynamically
     }
-    HalalScanner().crew().kickoff(inputs=inputs)
+    
+    try:
+        result = HalalScanner().crew().kickoff(inputs=inputs)
+
+        # Ensure the result is valid JSON
+        try:
+            json_result = json.loads(result)
+        except json.JSONDecodeError:
+            json_result = {"error": "Invalid JSON format", "raw_output": result}
+
+        # Print JSON for easy debugging
+        print(json.dumps(json_result, indent=2))
+
+    except Exception as e:
+        print(json.dumps({"error": f"An error occurred: {str(e)}"}))
 
 
 def train():
@@ -26,7 +36,7 @@ def train():
     Train the crew for a given number of iterations.
     """
     inputs = {
-        "topic": "AI LLMs"
+        "token_name": "Bitcoin"
     }
     try:
         HalalScanner().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
@@ -46,13 +56,21 @@ def replay():
 
 def test():
     """
-    Test the crew execution and returns the results.
+    Test the crew execution and return structured results.
     """
     inputs = {
-        "topic": "AI LLMs"
+        "token_name": "Bitcoin"
     }
     try:
-        HalalScanner().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
+        result = HalalScanner().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
+
+        # Parse and print JSON
+        try:
+            json_result = json.loads(result)
+        except json.JSONDecodeError:
+            json_result = {"error": "Invalid JSON format", "raw_output": result}
+
+        print(json.dumps(json_result, indent=2))
 
     except Exception as e:
-        raise Exception(f"An error occurred while replaying the crew: {e}")
+        print(json.dumps({"error": f"An error occurred: {str(e)}"}))
