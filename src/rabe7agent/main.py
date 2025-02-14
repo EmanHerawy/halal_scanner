@@ -2,7 +2,7 @@
 import sys
 import warnings
 
-from halal_scanner.crew import HalalScanner
+from rabe7agent.crew import Rabe7Agent
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -16,9 +16,12 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'AI LLMs'
+        'stock_selection': 'AAPL',  # Example stock selection
+        'topic': 'DeFi',            # Example topic if needed
+        'risk_tolerance': 'medium',  # Example risk tolerance if needed
+        'trading_strategy_preference': 'long_term'  # Example trading strategy preference if needed
     }
-    HalalScanner().crew().kickoff(inputs=inputs)
+    Rabe7Agent().crew().kickoff(inputs=inputs)
 
 
 def train():
@@ -26,10 +29,13 @@ def train():
     Train the crew for a given number of iterations.
     """
     inputs = {
-        "topic": "AI LLMs"
+        'stock_selection': 'AAPL',  # Example stock selection
+        'topic': 'DeFi',            # Example topic if needed
+        'risk_tolerance': 'medium',  # Example risk tolerance if needed
+        'trading_strategy_preference': 'long_term'  # Example trading strategy preference if needed
     }
     try:
-        HalalScanner().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        Rabe7Agent().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
@@ -39,7 +45,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        HalalScanner().crew().replay(task_id=sys.argv[1])
+        Rabe7Agent().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -52,7 +58,7 @@ def test():
         "topic": "AI LLMs"
     }
     try:
-        HalalScanner().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
+        Rabe7Agent().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")

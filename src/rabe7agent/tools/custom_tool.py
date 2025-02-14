@@ -1,6 +1,7 @@
 from crewai.tools import BaseTool
 from typing import Type
 from pydantic import BaseModel, Field
+from crewai_tools import ScrapeWebsiteTool, SerperDevTool
 
 
 class MyCustomToolInput(BaseModel):

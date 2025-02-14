@@ -1,0 +1,55 @@
+research_task:
+  description: >
+    Conduct comprehensive research on DeFi/ Crypto projects related to DeFi/ Crypto and gather actionable insights for market analysis.
+    Include relevant data points, current trends, and detailed information for the year 2025.
+  expected_output: >
+    A curated list of  DeFi/ Crypto projects relevant to DeFi/ Crypto, complete with key data points and trends to inform market analysis for {stock_selection}.
+  agent: researcher
+
+data_analysis_task:
+  description: >
+    Continuously monitor and analyze web3 market data for {stock_selection} in real time.
+    Employ statistical modeling and machine learning to identify trends and forecast market movements.
+  expected_output: >
+    Timely insights and alerts on significant web3 market opportunities or risks affecting {stock_selection}.
+  agent: data_analyst
+
+data_validation_task:
+  description: >
+    Validate the data collected from both research and analysis tasks.
+    Ensure the data is accurate, relevant, and specific to {stock_selection}, filtering out any projects that do not adhere to Islamic Shariah law.
+  expected_output: >
+    A refined list of projects that exclusively feature Shariah-compliant activities.
+  agent: data_validation
+
+strategy_development_task:
+  description: >
+    Develop and refine trading strategies based on insights from the Data Analyst and user-defined risk tolerance ({risk_tolerance}).
+    Incorporate trading preferences ({trading_strategy_preference}) to formulate robust and ethical trading strategies.
+  expected_output: >
+    A set of viable trading strategies for {stock_selection} that align with the user's risk tolerance and adhere to ethical, Shariah-compliant investment criteria.
+  agent: trading_strategy
+
+execution_planning_task:
+  description: >
+    Analyze the approved trading strategies to determine the optimal execution methods for {stock_selection}.
+    Consider current web3 market conditions and pricing factors to devise precise execution plans.
+  expected_output: >
+    Detailed execution plans recommending the best timings and methods to execute trades for {stock_selection}.
+  agent: execution
+
+risk_assessment_task:
+  description: >
+    Evaluate the risks associated with the proposed trading strategies and execution plans for {stock_selection}.
+    Provide an in-depth analysis of potential risks and suggest appropriate mitigation strategies.
+  expected_output: >
+    A comprehensive risk analysis report outlining potential risks and offering actionable mitigation recommendations for {stock_selection}.
+  agent: risk_management
+
+reporting_task:
+  description: >
+    Consolidate the research, analysis, and validation findings into a detailed, well-organized report.
+    Expand each topic into a dedicated section that encompasses all relevant insights and data.
+  expected_output: >
+    A complete report formatted in Markdown, with each main topic developed into a full section that presents thorough insights and actionable analysis.
+  agent: reporting_analyst
