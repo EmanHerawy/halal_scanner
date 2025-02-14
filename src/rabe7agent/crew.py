@@ -123,9 +123,7 @@ class Rabe7Agent:
 	@task
 	def reporting_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['reporting_task'],
-			return_type=JsonOutput,
-			
+			config=self.tasks_config['reporting_task']			
 		)
 
 	@crew
