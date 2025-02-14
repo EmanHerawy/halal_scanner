@@ -1,18 +1,14 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-
-# Uncomment the following line to use an example of a custom tool
-# from rabe7agent.tools.custom_tool import MyCustomTool
-
-# Check our tools documentations for more information on how to use them
-# from crewai_tools import SerperDevTool
 from pydantic import BaseModel, Field
 from crewai_tools import ScrapeWebsiteTool, SerperDevTool
 
+# Initialize tools
 search_tool = SerperDevTool()
 scrape_tool = ScrapeWebsiteTool()
+
 @CrewBase
-class Rabe7Agent():
+class Rabe7Agent:
 	"""Rabe7Agent crew"""
 
 	agents_config = 'config/agents.yaml'
@@ -23,16 +19,20 @@ class Rabe7Agent():
 		return Agent(
 			config=self.agents_config['researcher'],
 			allow_delegation=True,
-    tools = [scrape_tool, search_tool],
-			# tools=[MyCustomTool()], # Example of custom tool, loaded on the beginning of file
+			tools=[scrape_tool, search_tool],
+			memory=True,
+			model="gpt-3.5-turbo",
 			verbose=True
 		)
+
 	@agent
 	def data_analyst(self) -> Agent:
 		return Agent(
 			config=self.agents_config['data_analyst'],
-			tools = [scrape_tool, search_tool],
 			allow_delegation=True,
+			tools=[scrape_tool, search_tool],
+			memory=True,
+			model="gpt-3.5-turbo",
 			verbose=True
 		)
 
@@ -41,6 +41,8 @@ class Rabe7Agent():
 		return Agent(
 			config=self.agents_config['data_validation'],
 			allow_delegation=True,
+			memory=True,
+			model="gpt-4",
 			verbose=True
 		)
 
@@ -49,6 +51,8 @@ class Rabe7Agent():
 		return Agent(
 			config=self.agents_config['trading_strategy'],
 			allow_delegation=True,
+			memory=True,
+			model="gpt-4",
 			verbose=True
 		)
 
@@ -57,6 +61,8 @@ class Rabe7Agent():
 		return Agent(
 			config=self.agents_config['execution'],
 			allow_delegation=True,
+			memory=True,
+			model="gpt-4",
 			verbose=True
 		)
 
@@ -65,13 +71,18 @@ class Rabe7Agent():
 		return Agent(
 			config=self.agents_config['risk_management'],
 			allow_delegation=True,
+			memory=True,
+			model="gpt-4",
 			verbose=True
 		)
+
 	@agent
 	def reporting_analyst(self) -> Agent:
 		return Agent(
 			config=self.agents_config['reporting_analyst'],
 			allow_delegation=True,
+			memory=True,
+			model="gpt-4",
 			verbose=True
 		)
 
@@ -113,7 +124,8 @@ class Rabe7Agent():
 	def reporting_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['reporting_task'],
-			output_file='report.md'
+			return_type=JsonOutput,
+			
 		)
 
 	@crew

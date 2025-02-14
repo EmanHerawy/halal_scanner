@@ -1,55 +1,117 @@
 research_task:
   description: >
-    Conduct comprehensive research on DeFi/ Crypto projects related to DeFi/ Crypto and gather actionable insights for market analysis.
-    Include relevant data points, current trends, and detailed information for the year 2025.
+    Conduct comprehensive research on DeFi/Crypto projects related to {token_name} and gather actionable insights for market analysis.
+    Include relevant data points, compliance factors, risk indicators, and emerging trends for the year 2025.
   expected_output: >
-    A curated list of  DeFi/ Crypto projects relevant to DeFi/ Crypto, complete with key data points and trends to inform market analysis for {stock_selection}.
+    {
+      "token_name": "{token_name}",
+      "is_hala": "boolean",
+      "compliance_analysis": "Detailed analysis of whether {token_name} adheres to Islamic finance principles",
+      "key_data_points": ["List of relevant statistics and metrics"],
+      "market_trends": "Current DeFi/Crypto trends affecting {token_name}",
+      "exclusions": "Reasons for exclusion if {token_name} is not Shariah-compliant"
+    }
   agent: researcher
 
 data_analysis_task:
   description: >
-    Continuously monitor and analyze web3 market data for {stock_selection} in real time.
-    Employ statistical modeling and machine learning to identify trends and forecast market movements.
+    Continuously monitor and analyze web3 market data for {token_name} in real time.
+    Use statistical modeling and machine learning to identify trends, compliance status, and forecast potential market movements.
   expected_output: >
-    Timely insights and alerts on significant web3 market opportunities or risks affecting {stock_selection}.
+    {
+      "token_name": "{token_name}",
+      "market_analysis": {
+        "price_trends": "Recent price movements and historical patterns",
+        "liquidity": "Analysis of liquidity pools and trading volume",
+        "volatility": "Risk assessment based on price fluctuations",
+        "governance": "Token governance model and control structures"
+      },
+      "compliance_score": "Numerical score indicating Shariah compliance likelihood",
+      "profitability_forecast": "Estimated return potential and investment feasibility"
+    }
   agent: data_analyst
 
 data_validation_task:
   description: >
-    Validate the data collected from both research and analysis tasks.
-    Ensure the data is accurate, relevant, and specific to {stock_selection}, filtering out any projects that do not adhere to Islamic Shariah law.
+    Validate all research and analysis data for {token_name} to ensure accuracy and strict adherence to Shariah law.
+    Remove projects involving riba (interest), gharar (excessive uncertainty), or unethical activities.
   expected_output: >
-    A refined list of projects that exclusively feature Shariah-compliant activities.
+    {
+      "token_name": "{token_name}",
+      "is_hala": "boolean",
+      "validation_results": {
+        "riba_presence": "Yes/No",
+        "gharar_presence": "Yes/No",
+        "unethical_activities": "List of detected issues",
+        "final_compliance_decision": "Accepted/Rejected with reasoning"
+      }
+    }
   agent: data_validation
 
 strategy_development_task:
   description: >
-    Develop and refine trading strategies based on insights from the Data Analyst and user-defined risk tolerance ({risk_tolerance}).
-    Incorporate trading preferences ({trading_strategy_preference}) to formulate robust and ethical trading strategies.
+    Develop trading strategies exclusively for tokens that pass compliance validation.
+    Strategies should align with user-defined risk tolerance ({risk_tolerance}) and trading preferences ({trading_strategy_preference}).
   expected_output: >
-    A set of viable trading strategies for {stock_selection} that align with the user's risk tolerance and adhere to ethical, Shariah-compliant investment criteria.
+    {
+      "token_name": "{token_name}",
+      "trading_strategy": {
+        "strategy_type": "{trading_strategy_preference}",
+        "risk_level": "{risk_tolerance}",
+        "expected_profitability": "Projected ROI for {token_name}",
+        "investment_horizon": "Short-term / Long-term",
+        "excluded_methods": "List of trading methods that violate Islamic finance"
+      }
+    }
   agent: trading_strategy
 
 execution_planning_task:
   description: >
-    Analyze the approved trading strategies to determine the optimal execution methods for {stock_selection}.
-    Consider current web3 market conditions and pricing factors to devise precise execution plans.
+    Analyze the approved trading strategies for {token_name} to determine the best execution methods.
+    Consider current web3 market conditions and pricing factors to recommend optimal trade execution plans.
   expected_output: >
-    Detailed execution plans recommending the best timings and methods to execute trades for {stock_selection}.
+    {
+      "token_name": "{token_name}",
+      "execution_plan": {
+        "optimal_trade_timing": "Recommended trade timing based on market conditions",
+        "execution_method": "Best trade execution approach (e.g., market order, limit order)",
+        "slippage_risk": "Assessment of potential price slippage",
+        "fee_analysis": "Projected gas fees and trading costs"
+      }
+    }
   agent: execution
 
 risk_assessment_task:
   description: >
-    Evaluate the risks associated with the proposed trading strategies and execution plans for {stock_selection}.
-    Provide an in-depth analysis of potential risks and suggest appropriate mitigation strategies.
+    Evaluate the financial and compliance risks associated with investing in {token_name}.
+    Provide an in-depth risk-reward analysis and suggest appropriate risk mitigation strategies.
   expected_output: >
-    A comprehensive risk analysis report outlining potential risks and offering actionable mitigation recommendations for {stock_selection}.
+    {
+      "token_name": "{token_name}",
+      "risk_assessment": {
+        "market_risk": "Evaluation of volatility and price manipulation risk",
+        "liquidity_risk": "Potential liquidity issues and impact on trade execution",
+        "regulatory_risk": "Risk of non-compliance with financial regulations",
+        "mitigation_strategies": "Recommended risk mitigation techniques"
+      },
+      "profitability_score": "Projected return adjusted for risk factors"
+    }
   agent: risk_management
 
 reporting_task:
   description: >
-    Consolidate the research, analysis, and validation findings into a detailed, well-organized report.
-    Expand each topic into a dedicated section that encompasses all relevant insights and data.
+    Compile all research, analysis, validation, and risk assessments into a structured JSON report.
+    Ensure the report provides a clear decision on whether {token_name} is Hala or not, along with risk and profitability insights.
   expected_output: >
-    A complete report formatted in Markdown, with each main topic developed into a full section that presents thorough insights and actionable analysis.
+    {
+      "token_name": "{token_name}",
+      "final_report": {
+        "is_hala": "boolean",
+        "compliance_summary": "Final compliance decision with detailed explanation",
+        "market_analysis": "Summary of price trends, liquidity, and governance insights",
+        "risk_analysis": "Overview of key risks and mitigation strategies",
+        "profitability_forecast": "Expected return potential",
+        "investment_recommendation": "Buy/Hold/Sell recommendation based on all factors"
+      }
+    }
   agent: reporting_analyst

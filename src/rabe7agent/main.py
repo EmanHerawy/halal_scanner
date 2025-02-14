@@ -16,10 +16,9 @@ def run():
     Run the crew.
     """
     inputs = {
-        'stock_selection': 'AAPL',  # Example stock selection
-        'topic': 'DeFi',            # Example topic if needed
-        'risk_tolerance': 'medium',  # Example risk tolerance if needed
-        'trading_strategy_preference': 'long_term'  # Example trading strategy preference if needed
+        "token_name": "1inch",
+        "risk_tolerance": "medium",
+        "trading_strategy_preference": "long_term"
     }
     Rabe7Agent().crew().kickoff(inputs=inputs)
 
@@ -29,10 +28,9 @@ def train():
     Train the crew for a given number of iterations.
     """
     inputs = {
-        'stock_selection': 'AAPL',  # Example stock selection
-        'topic': 'DeFi',            # Example topic if needed
-        'risk_tolerance': 'medium',  # Example risk tolerance if needed
-        'trading_strategy_preference': 'long_term'  # Example trading strategy preference if needed
+        "token_name": "1inch",
+        "risk_tolerance": "medium",
+        "trading_strategy_preference": "long_term"
     }
     try:
         Rabe7Agent().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
@@ -55,7 +53,9 @@ def test():
     Test the crew execution and returns the results.
     """
     inputs = {
-        "topic": "AI LLMs"
+        "token_name": "1inch",
+        "risk_tolerance": "medium",
+        "trading_strategy_preference": "long_term"
     }
     try:
         Rabe7Agent().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
